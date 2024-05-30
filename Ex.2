@@ -1,0 +1,29 @@
+# c) Probabilidade da mosca cair em uma teia exatamente no terceiro minuto
+
+# Probabilidade da mosca estar no compartimento 1 no terceiro minuto
+prob_teia = P[0, 0] * P[0, 0] + P[0, 3] * P[3, 3]
+print("Probabilidade da mosca cair em uma teia no terceiro minuto:", prob_teia)
+
+# d) Número médio de passos para a absorção
+
+# Matriz de transição sem a última linha e coluna
+T = P[:3, :3]
+
+# Calculando a matriz (I - T)^(-1)
+I_minus_T_inv = np.linalg.inv(np.eye(3) - T)
+
+# Vetor de uns
+ones = np.ones(3)
+
+# Calculando o número médio de passos para a absorção
+average_steps = np.dot(I_minus_T_inv, ones)
+print("Número médio de passos para a absorção:", average_steps)
+
+# e) Probabilidade de ser absorvido associada a cada estado
+
+# Vetor com um 1 na posição correspondente ao estado inicial
+e = np.array([1, 0, 0])
+
+# Calculando a probabilidade de ser absorvido associada a cada estado
+prob_absorption = np.dot(I_minus_T_inv, e)
+print("Probabilidade de ser absorvido associada a cada estado:", prob_absorption)
